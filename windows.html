@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bad Files</title>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.css">
+    <script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>
+    <link rel="stylesheet" href="styles.css"></link>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#!">badfiles</a>
+            <button class="navbar-toggler" 
+                    type="button" 
+                    data-bs-toggle="collapse" 
+                    data-bs-target="#navbarSupportedContent" 
+                    aria-controls="navbarSupportedContent" 
+                    aria-expanded="false" 
+                    aria-label="Toggle navigation"
+            >
+                <span class="navbar-toggler-icon"></span>
+            </button>
+    
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item"><a class="nav-link " href="/">Extensions</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="/windows.html">Windows</a></li>
+                    <li class="nav-item"><a class="nav-link " href="/about.html">About</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <table id="myTable" class="display">
+        <thead>
+            <tr>
+                <!-- assuming your object has three properties: name, age, and city -->
+                <th>Extension</th>
+                <th>DoubleClick</th>
+                <th>Judgment</th>
+                <th>Judgment</th>
+                <th>App Name</th>
+                <th>UWP</th>
+                <th>Executable Path</th>
+                <th>Args</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Data will be inserted here via JavaScript -->
+        </tbody>
+    </table>
+
+    <script>
+        // Fetching data from JSON file and initializing DataTable
+        $(document).ready(function() {
+            $.getJSON('info.json', function(data) {
+                $.each(data, function(key, value) {
+                    var row = $('<tr></tr>');
+                    row.append('<td>' + value.Extension + '</td>');
+                    row.append('<td>' + value.Result + '</td>');
+                    row.append('<td>' + value.Assumption + '</td>');
+                    row.append('<td>' + value.Judgement + '</td>');
+
+                    row.append('<td>' + value.AppName + '</td>');
+                    row.append('<td>' + value.CmdExePath + '</td>');
+                    row.append('<td>' + value.CmdArgs + '</td>');
+                    $('#myTable tbody').append(row);
+                });
+
+                $('#myTable').DataTable();
+            });
+        });
+    </script>
+</body>
+</html>

@@ -8,21 +8,46 @@
     <script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-3.5.1.js"></script>
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>
     <link rel="stylesheet" href="styles.css"></link>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 </head>
 <body>
-    <table id="myTable" class="compact row-border">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#!">badfiles</a>
+            <button class="navbar-toggler" 
+                    type="button" 
+                    data-bs-toggle="collapse" 
+                    data-bs-target="#navbarSupportedContent" 
+                    aria-controls="navbarSupportedContent" 
+                    aria-expanded="false" 
+                    aria-label="Toggle navigation"
+            >
+                <span class="navbar-toggler-icon"></span>
+            </button>
+    
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item"><a class="nav-link active" href="/">Extensions</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/windows.html">Windows</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/about.html">About</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+
+    <table id="myTable" class="table compact cell-border ">
         <thead>
             <tr>
                 <!-- assuming your object has three properties: name, age, and city -->
                 <th>Extension</th>
-                <th>Confidence</th>
-                <th>Common</th>
-                <th>Exec</th>
                 <th>Category</th>
-                <th>MitreInitialAccess</th>
-                <th>MitreExecution</th>
-                <th>WindowsBuiltin</th>
+                <th>Exec</th>
+                <th>MITRE InitialAccess/Execution</th>
+
                 <th>Notes</th>
+                <th>Builtin</th>
             </tr>
         </thead>
         <tbody>
@@ -54,15 +79,23 @@
                     var Notes = value.Notes !== undefined ? value.Notes : '';
 
                     row.append('<td>' + value.Extension + '</td>');
-                    row.append('<td>' + Confidence + '</td>');
-                    row.append('<td>' + Common + '</td>');
-                    row.append('<td>' + Exec + '</td>');
                     row.append('<td>' + Category + '</td>');
 
-                    row.append('<td>' + MitreInitialAccess + '</td>');
-                    row.append('<td>' + MitreExecution + '</td>');
-                    row.append('<td>' + WindowsBuiltin + '</td>');
+                    if (Exec == "") {
+                        row.append('<td>' + Exec + '</td>');
+                    } else {
+                        row.append('<td style="color: red;">' + Exec + '</td>');
+                    }
+
+                    if (MitreInitialAccess == "" && MitreExecution == "") {
+                        row.append('<td>' + '</td>');
+                    } else {
+                        row.append('<td style="color: orange;">' + MitreInitialAccess + ' / ' +MitreExecution + '</td>');
+                    }
+                    
+                    
                     row.append('<td>' + Notes + '</td>');
+                    row.append('<td>' + WindowsBuiltin + '</td>');
                     $('#myTable tbody').append(row);
                 });
 

@@ -36,8 +36,8 @@ Extensions:
     Description: Batch script file for cmd.exe
     Confidence: High
     Exec: True
-    MitreInitialAccess: Often
-    MitreExecution: Often
+    MitreInitialAccess: often
+    MitreExecution: often
     WindowsBuiltin: True
     Notes: Always available, except if application whitelistening is active. Commonly blocked.
 
@@ -344,7 +344,6 @@ Extensions:
     MitreInitialAccess: often
     Container: True
     BusinessCase: True
-    Notes: 
 
   - Extension: .ppt
     Description: Office Powerpoint Doc (with macros)
@@ -354,7 +353,6 @@ Extensions:
     Exec: True
     MitreInitialAccess: sometimes
     BusinessCase: True
-    Notes: 
 
   - Extension: .xls
     Description: Office Execel Doc (with macros)
@@ -364,7 +362,6 @@ Extensions:
     Exec: True
     MitreInitialAccess: sometimes
     BusinessCase: True
-    Notes: 
 
   - Extension: .xlm
     Description: Office Excel 4 Doc (with macros)
@@ -381,7 +378,6 @@ Extensions:
     MitreInitialAccess: often
     Container: True
     BusinessCase: True
-    Notes: 
 
   - Extension: .pptx
     Description: Office Powerpoint Doc (without macros)
@@ -390,7 +386,6 @@ Extensions:
     Common: True
     Exec: True
     BusinessCase: True
-    Notes: 
 
   - Extension: .xlsx
     Description: Office Execel Doc with (without macros)
@@ -400,7 +395,6 @@ Extensions:
     Exec: True
     MitreInitialAccess: sometimes
     BusinessCase: True
-    Notes: 
 
   - Extension: .docm
     Description: Office Word Doc with macros
@@ -411,7 +405,6 @@ Extensions:
     MitreInitialAccess: often
     Container: True
     BusinessCase: True
-    Notes: 
 
   - Extension: .pptm
     Description: Office Powerpoint Doc with macros
@@ -421,7 +414,6 @@ Extensions:
     Exec: True
     MitreInitialAccess: sometimes
     BusinessCase: True
-    Notes: 
 
   - Extension: .xlsm
     Description: Office Execel Doc with macros
@@ -462,7 +454,6 @@ Extensions:
     Category: Office
     Confidence: Filesec
     Exec: True
-    WindowsBuiltin: True
     Notes: It's a Word recovery file, but be cautious of macros or embedded objects if opened.
 
   - Extension: .iqy
@@ -540,11 +531,6 @@ Extensions:
     Description: Microsoft Access table shortcut
     Category: Office
     Notes: Can reference tables in Access.
-  - Extension: 
-    Description: 
-    Exec: True
-    Category: Office
-    Notes: 
   - Extension: .mav
     Description: Microsoft Access view shortcut
     Category: Office
@@ -553,23 +539,7 @@ Extensions:
     Description: Microsoft Access data access page
     Category: Office
     Notes: Can reference and execute data access pages in Access.
-  - Extension: 
-    Description: 
-    Exec: True
-    Category: Office
-    Notes: 
     
-  - Extension: 
-    Description: 
-    Exec: True
-    Category: Office
-    Notes: 
-  - Extension: 
-    Description: 
-    Exec: True
-    Category: Office
-    Notes: 
-
   # Archives
   - Extension: .zip
     Description: ZIP Archive
@@ -591,21 +561,18 @@ Extensions:
     Container: True
     WindowsBuiltin: True
 
-  - Extension: .iso
-    Description: ISO File
-    Category: Archive
-    Container: True
-
   - Extension: .vhd
     Description: Hyper-V Virtual Hard Disk files
     Category: Container
     Container: True
+    WindowsBuiltin: True
     Notes: Disk image file. Doesn't execute, but the contents inside, once mounted, might contain malicious files or software.
 
   - Extension: .vhdx
     Description: Hyper-V Virtual Hard Disk files
     Category: Container
     Container: True
+    WindowsBuiltin: True
     Notes: Similar concerns as .vhd. Contents inside, once mounted, might be harmful.
 
   - Extension: .rar
@@ -644,6 +611,7 @@ Extensions:
     Confidence: High
     Exec: True
     Container: True
+    WindowsBuiltin: True
 
   - Extension: .gz
     Description: 
