@@ -5,11 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bad Files</title>
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
     <script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-3.5.1.js"></script>
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>
-    <link rel="stylesheet" href="styles.css"></link>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" href="styles.css"></link>
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -35,5 +37,189 @@
             </div>
         </div>
     </nav>
+
+    <h1>Legend</h1>
+
+    <h3>Category</h3>
+    <p>
+    A wide categorization of the extensions. 
+    Mostly for <b>organizational purposes</b>. 
+    Not strict, consumed by humans, informative.<br>
+
+    <table class="table">
+        <tr>
+            <th>Category</th>
+            <th>Description</th>
+            <th>Can execute?</th>
+        </tr>
+        <tr>
+            <td>Office</td>
+            <td>Mostly MS Office related (.docx, .pptm)</td>
+            <td>Yes: Makros, OLE</td>
+        </tr><tr>
+            <td>Executable</td>
+            <td>Its a file intended to be executed, native code (.exe, .bat)</td>
+            <td>Always</td>
+        </tr><tr>
+            <td>Script</td>
+            <td>Its a file intended to be executed, interpreted code (.js, .vb)</td>
+            <td>Usually</td>
+        </tr><tr>
+            <td>Code</td>
+            <td>It has code, but cannot be executed by double clicking (.dll, .aspx)</td>
+            <td>Never</td>
+        </tr><tr>
+            <td>System</td>
+            <td>Windows related files without much details (can be executable, script, code...)</td>
+            <td>Can</td>
+        </tr><tr>
+            <td>Document</td>
+            <td>A document which cannot execute code (.rtf)</td>
+            <td>Never</td>
+        </tr><tr>
+            <td>Archive</td>
+            <td>File archive (.zip, .rar). Can usually execute code.</td>
+            <td>Always</td>
+        </tr><tr>
+            <td>HTML</td>
+            <td>Special case dedicated for HTML (.html, .htm). Can execute code by HTML Smuggling files</td>
+            <td>Yes</td>
+        </tr><tr>
+            <td>Image</td>
+            <td>Plain old images (.jpg, .gif)</td>
+            <td>No</td>
+        </tr>
+    </table>
+
+    </p>
+
+    <h3>Exec</h3>
+    <p>
+    Is it possible to <b>execute code when opened/clicked</b>? <br>
+    Or in other words, can it lead to initial access?
+    <ul>
+        <li>Directly executable: .exe, .com, .scr</li>
+        <li>Feature executable: .docm (Makros and OLE)</li>
+        <li>File container: .zip, .iso (can contain executable files)</li>
+        <li>Special cases: .lnk, .reg</li>
+    </ul>
+    Note: For many of the more unknown/uncommon file extensions, it is not completely clear if code execution is possible.
+    </p>
+
+    <h3>MITRE Initial Access & Execution</h3>
+    <p>
+    <b>MITRE Initial Access</b>: Is the file extension being used for initial access? (Opinion based on CTI)<br>
+    Currently, a lot of attacks involve .iso, .zip with a .exe or .bat. Also .docm has been widely used, now 
+    superseeded by .one. This is based on my own Cyber Threat Intelligence (CTI) gathering and common sense.
+    <br>
+    <br>
+    <b>MITRE Execution</b>: Is the file extension being used for execution? <br>
+    This opinion is also based on CTI. For example threat actors like to chain .lnk, .bat, .js, .vbs and rundll 
+    to execute different parts of their execution chain. 
+    <br>
+    </p>
+
+    <h3>Builtin</h3>
+    <p>
+        If its generally directly builtin into windows. Informative, unstable. <br>
+        .exe is always builtin, .docm is an optional software.
+    </p>
+
+    <h1>YAML Specification</h1>
+    The <a href="https://github.com/dobin/badfiles/blob/main/info.yaml">YAML file</a> contains more data than displayed currently.
+    <p>
+        <table class="table">
+            <tr>
+                <td>Extension</td>
+                <td>The file extension, with a dot (.exe)</td>
+            </tr><tr>
+                <td>Category</td>
+                <td>Broad category of this file extension (Archive, Executable)</td>
+            </tr><tr>
+                <td>Description</td>
+                <td>The file extension written out (.msi -> Windows Installer Package)</td>
+            </tr><tr>
+                <td>Confidence</td>
+                <td>
+                    How much i'd trust ALL information in this extension description <br>
+                    "High" when written, "Low" when nothing is mentioned.
+                </td>
+            </tr><tr>
+                <td>Common</td>
+                <td>
+                    Is the file a common sight? (.docx yes, .pif no) <br>
+                    True if its common, default is False. 
+                </td>
+            </tr><tr>
+                <td>Exec</td>
+                <td>
+                    Can the file be executed (.exe, .vb), or provides feature which can lead to execution? (.docm, .iso)<br>
+                    Or in other words, can this file be reasonably lead the user to execute attacker code? Default False.
+                </td>
+            </tr><tr>
+                <td>Code</td>
+                <td>
+                    The file contains code, which cannot be directly executed when clicking. <br>
+                    For example .dll, .aspx, .sh are typically harmless when clicked. Can be used for MITRE Execution. Default False.
+                </td>
+            </tr><tr>
+                <td>MitreInitialAccess</td>
+                <td>
+                    The extension is known to be used in real world attacks as initial access.
+                    Either "often" or "sometimes". Will be "no" if not set.
+                </td>
+            </tr><tr>
+                <td>MitreExecution</td>
+                <td>
+                    The extension is known to be used in real world attacks as execution.
+                    Either "often" or "sometimes". Will be "no" if not set.
+                </td>
+            </tr><tr>
+                <td>WindowsBuiltin</td>
+                <td>
+                    Does windows support it out of the box. <br>
+                    .docx will be a False, .zip will be a True. Default False.
+                </td>
+            </tr><tr>
+                <td>Notes</td>
+                <td>
+                    Notes about the exploitability, recommendations, hardening etc.
+                </td>
+            </tr><tr>
+                <td>Container</td>
+                <td>
+                    Set to true if it can contain other files (e.g. .zip, .iso, .docx). <br>
+                    Usually always executable. Default False.
+                </td>
+            </tr><tr>
+                <td>BusinessCase</td>
+                <td>
+                    Does a business case exist for this file extension? <br>
+                    .docx often has one, .pif not. Default False.
+                </td>
+            </tr>
+        </table>
+    </p>
+
+    <h1>Source</h1>
+    <p>
+    Github Repo: <a href="https://github.com/dobin/badfiles">dobin/badfiles</a>
+    <br>
+    Waasa: <a href="https://github.com/dobin/waasa">dobin/waasa</a><br>
+    </p>
+
+    <h1>Where is the data coming from?</h1>
+
+    <ul>
+        <li>filesec.io list</li>
+        <li>govcert.ch list </li>
+        <li>IOProtect.ch list</li>
+        <li>MS Outlook & OneNote list https://support.microsoft.com/en-us/office/blocked-attachments-in-outlook-434752e1-02d3-4e90-9124-8b81e49a8519</li>
+        <li>https://github.com/michalzobec/Security-Blocked-File-Extensions-Attachments</li>
+        <li>ChatGPT</li>
+        <li>Me</li>
+        <li>https://www.howtogeek.com/137270/50-file-extensions-that-are-potentially-dangerous-on-windows/</li>
+    </ul>
+
 </body>
 </html>
