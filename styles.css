@@ -14,3 +14,14 @@ h2, h3, h4, h5 {
     margin-bottom: 0.5em;
 }
 
+.table {
+    border-color: #eaeaea !important; /* This sets the outer border color */
+}
+
+.table th, .table td {
+    border-color: #f2f2f2 !important; /* This sets the cell borders */
+}
+
+.table thead th {
+    border-bottom-color: #e0e0e0 !important; /* Adjust the header bottom border if needed */
+}
