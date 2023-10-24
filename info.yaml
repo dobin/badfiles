@@ -30,7 +30,6 @@
     WindowsBuiltin: True
     Notes: Just an .exe
 
-
   - Extension: .bat
     Category: Executable
     Description: Batch script file for cmd.exe
@@ -78,6 +77,7 @@
     Confidence: Govcert.ch
     Exec: True
     WindowsBuiltin: True
+    MitreInitialAccess: sometimes
     Notes: Encoded version of .vbs. Makes it harder to read, but can be used for same malicious purposes as .vbs.
 
   - Extension: .vb
@@ -93,6 +93,8 @@
     Confidence: Govcert.ch
     Exec: True
     WindowsBuiltin: True
+    MitreInitialAccess: sometimes
+    MitreExecution: sometimes
     Notes: Allows mixing of scripting languages. Can execute malicious scripts.
 
   - Extension: .wsh
@@ -117,8 +119,14 @@
     WindowsBuiltin: True
     Notes: Allows for the creation of COM objects with scripts. Can be used to execute malicious scripts.
 
-  - Extension: .inf
+  - Extension: ".inf"
     Exec: True
+    Category: System
+    Description: 
+    WindowsBuiltin: True
+    Notes: If run, this file could potentially launch dangerous applications it came with or pass dangerous options to programs included with Windows.
+
+  - Extension: .ini
     Category: System
     Description: 
     WindowsBuiltin: True
@@ -172,6 +180,7 @@
     Confidence: Filesec
     Exec: True
     WindowsBuiltin: True
+    MitreInitialAccess: sometimes
     Notes: Can run embedded scripts or malicious payloads when opened.
 
   - Extension: .hlp
@@ -342,6 +351,7 @@
     Description: Java Archive
     Category: System
     Exec: True
+    MitreInitialAccess: sometimes
     Notes: Can execute Java code when opened with Java Runtime Environment, if installed.
 
   # Office files
@@ -403,7 +413,7 @@
     Confidence: High
     Common: True
     Exec: True
-    MitreInitialAccess: sometimes
+    MitreInitialAccess: often
     BusinessCase: True
 
   - Extension: .docm
@@ -441,6 +451,7 @@
     Description: Office Powerpoint with macros
     Category: Office
     Exec: True
+    MitreInitialAccess: sometimes
 
   - Extension: .ppsm
     Description: Office Powerpoint with macros
@@ -457,7 +468,7 @@
     Category: Office
     Confidence: High
     Exec: True
-    MitreInitialAccess: sometimes
+    MitreInitialAccess: often
     BusinessCase: True
 
   - Extension: .xltm
@@ -470,6 +481,7 @@
     Description: Office Excel Add-in
     Category: Office
     Exec: True
+    MitreInitialAccess: often
 
   - Extension: .xlam
     Description: Office Excel Add-in
@@ -480,6 +492,7 @@
     Description: Office Excel Add-in
     Category: Office
     Exec: True
+    MitreInitialAccess: sometimes
 
   - Extension: .xlw
     Description: Office Excel Add-in
@@ -590,6 +603,37 @@
     Description: Microsoft Access data access page
     Category: Office
     Notes: Can reference and execute data access pages in Access.
+
+  - Extension: .one
+    Description: Onenote
+    Category: Office
+    Confidence: High
+    Exec: True
+    MitreInitialAccess: often
+    Container: True
+    WindowsBuiltin: True
+    Notes: May have file extension blacklist
+  - Extension: .onepkg
+    Description: Onenote
+    Category: Office
+    Exec: True
+    Container: True
+    WindowsBuiltin: True
+    Notes: May have file extension blacklist
+  - Extension: .onetoc
+    Description: Onenote
+    Category: Office
+    Exec: True
+    Container: True
+    WindowsBuiltin: True
+    Notes: May have file extension blacklist
+  - Extension: .onetoc2
+    Description: Onenote
+    Category: Office
+    Exec: True
+    Container: True
+    WindowsBuiltin: True
+    Notes: May have file extension blacklist
     
   # Archives
   - Extension: .zip
@@ -663,6 +707,7 @@
     Exec: True
     Container: True
     WindowsBuiltin: True
+    MitreInitialAccess: sometimes
 
   - Extension: .gz
     Description: 
@@ -692,6 +737,7 @@
     Category: Code
     Confidence: High
     Code: True
+    MitreExecution: often
     Common: True
   - Extension: .ps1xml
     Description: Powershell script
@@ -827,6 +873,7 @@
     Category: Document
     WindowsBuiltin: True
     BusinessCase: True
+    MitreInitialAccess: sometimes
     Notes: Can potentially contain embedded objects or links that could lead to malicious content or actions when opened.
 
   - Extension: .xps
