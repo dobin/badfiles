@@ -38,16 +38,14 @@
         </div>
     </nav>
 
-    <table id="myTable" class="display">
+    <table id="myTable" class="table compact cell-border">
         <thead>
             <tr>
                 <!-- assuming your object has three properties: name, age, and city -->
                 <th>Extension</th>
                 <th>DoubleClick</th>
                 <th>Judgment</th>
-                <th>Judgment</th>
                 <th>App Name</th>
-                <th>UWP</th>
                 <th>Executable Path</th>
                 <th>Args</th>
             </tr>
@@ -60,21 +58,43 @@
     <script>
         // Fetching data from JSON file and initializing DataTable
         $(document).ready(function() {
-            $.getJSON('info.json', function(data) {
+            $.getJSON('waasa.json', function(data) {
                 $.each(data, function(key, value) {
                     var row = $('<tr></tr>');
                     row.append('<td>' + value.Extension + '</td>');
-                    row.append('<td>' + value.Result + '</td>');
                     row.append('<td>' + value.Assumption + '</td>');
-                    row.append('<td>' + value.Judgement + '</td>');
+
+                    var j = "";
+                    switch(value.Judgement) {
+                        case 0:
+                            j = ""; // unknown
+                            break;
+                        case 1:
+                            j = "Good";
+                            break;
+                        case 2: 
+                            j = "Bad";
+                            break;
+                        case 3:
+                            j = "Careful";
+                            break;
+                    }
+
+                    row.append('<td>' + j + '</td>');
 
                     row.append('<td>' + value.AppName + '</td>');
                     row.append('<td>' + value.CmdExePath + '</td>');
                     row.append('<td>' + value.CmdArgs + '</td>');
-                    $('#myTable tbody').append(row);
+
+                    if (value.Assumption != "openwith") {
+                        $('#myTable tbody').append(row);
+                    }
                 });
 
-                $('#myTable').DataTable();
+                $('#myTable').DataTable({
+                    searching: false,
+                    paging: false,
+                });
             });
         });
     </script>
