@@ -45,7 +45,8 @@
                 <th>Extension</th>
                 <th>Category</th>
                 <th>Exec</th>
-                <th>MITRE InitialAccess/Execution</th>
+                <th>MITRE InitialAccess</th>
+                <th>MITRE Execution</th>
 
                 <th>Notes</th>
                 <th>Builtin</th>
@@ -80,10 +81,15 @@
                         row.append('<td style="color: red;">' + Exec + '</td>');
                     }
 
-                    if (MitreInitialAccess == "" && MitreExecution == "") {
+                    if (MitreInitialAccess == "") {
                         row.append('<td>' + '</td>');
                     } else {
-                        row.append('<td style="color: orange;">' + MitreInitialAccess + ' / ' +MitreExecution + '</td>');
+                        row.append('<td style="color: orange;">' + MitreInitialAccess + '</td>');
+                    }
+                    if (MitreExecution == "") {
+                        row.append('<td>' + '</td>');
+                    } else {
+                        row.append('<td style="color: orange;">' + MitreExecution + '</td>');
                     }
                     
                     
