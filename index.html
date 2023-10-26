@@ -38,6 +38,12 @@
         </div>
     </nav>
 
+    <span data-bs-toggle="tooltip" data-bs-class="wider-tooltip" data-bs-html="true" data-bs-delay="300"
+    title="asdf"
+>
+    <i class="bi bi-info-circle"></i>aaaaaaaaaaaaaaaaaaaaaaaa
+</span>
+
     
     <table id="myTable" class="table compact cell-border ">
         <thead>
@@ -56,6 +62,8 @@
             <!-- Data will be inserted here via JavaScript -->
         </tbody>
     </table>
+
+
 
     <script>
         $(document).ready(function() {
@@ -78,23 +86,23 @@
                     if (Exec == "") {
                         row.append('<td>' + Exec + '</td>');
                     } else {
-                        row.append('<td style="color: red;">' + Exec + '</td>');
+                        row.append('<td style="color: red;" data-bs-toggle="tooltip" data-bs-placement="top" title="Can execute arbitrary code when opened">' + Exec + '</td>');
                     }
 
                     if (MitreInitialAccess == "") {
                         row.append('<td>' + '</td>');
                     } else {
-                        row.append('<td style="color: orange;">' + MitreInitialAccess + '</td>');
+                        row.append('<td style="color: orange;" data-bs-toggle="tooltip" data-bs-placement="top" title="MITRE Initial Access">' + MitreInitialAccess + '</td>');
                     }
                     if (MitreExecution == "") {
                         row.append('<td>' + '</td>');
                     } else {
-                        row.append('<td style="color: orange;">' + MitreExecution + '</td>');
+                        row.append('<td style="color: orange;" data-bs-toggle="tooltip" data-bs-placement="top" title="MITRE Execution">' + MitreExecution + '</td>');
                     }
                     
                     
                     row.append('<td>' + Notes + '</td>');
-                    row.append('<td>' + WindowsBuiltin + '</td>');
+                    row.append('<td data-bs-toggle="tooltip" data-bs-placement="top" title="Windows builtin">' + WindowsBuiltin + '</td>');
                     $('#myTable tbody').append(row);
                 });
 
