@@ -11,9 +11,12 @@ List of bad file extensions.
 * https://github.com/michalzobec/Security-Blocked-File-Extensions-Attachments
 * ChatGPT
 * Me
-
+* Chrome Safe Browsing list
 
 Mitre Initial Access and MITRE Execution is done based on my CTI. 
+
+The main reference file is located in the Waasa project at [info.yaml](https://github.com/dobin/waasa/blob/master/waasa/Data/info.yaml).
+badfiles.ch is just a viewer.
 
 
 ## Files
